@@ -38,10 +38,11 @@ public class EmpresaAdapter implements EmpresaServiceOut {
 
     @Override
     public EmpresaDTO createEmpresaOut(String ruc) {
-        EmpresaEntity empresa = getEntityForSave(ruc);
-        EmpresaEntity empresaEntity = empresaRepository.save(empresa);
-        EmpresaDTO dto = mapToEmpresaDTO(empresaEntity);
-        return dto;
+//        EmpresaEntity empresa = getEntityForSave(ruc);
+//        EmpresaEntity empresaEntity = empresaRepository.save(empresa); // registrar en la base de datos
+//        EmpresaDTO dto = mapToEmpresaDTO(empresaEntity);
+//        return dto;
+        return mapToEmpresaDTO(empresaRepository.save(getEntityForSave(ruc)));
     }
 
     private EmpresaEntity getEntityForSave(String ruc){

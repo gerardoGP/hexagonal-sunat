@@ -14,9 +14,9 @@ public class EmpresaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String razSoc;
     @Column(unique = true)
     private String numDoc;
-    private String razSoc;
     private String status;
     private String condition;
     private String addres;
@@ -24,7 +24,7 @@ public class EmpresaEntity {
     private String prov;
     private String dist;
     private String economicActivity;
-    private Integer numEmployed;
+    private String numEmployed;
     private String userCreate;
     private Timestamp dateCreate;
 }

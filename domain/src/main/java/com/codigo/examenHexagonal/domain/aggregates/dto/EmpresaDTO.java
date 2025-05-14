@@ -13,16 +13,16 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class EmpresaDTO {
     private Long id;
-    private String razonSocial;
-    private String numeroDocumento;
-    private String estado;
-    private String condicion;
-    private String direccion;
-    private String departamento;
-    private String provincia;
-    private String distrito;
-    private String actividadEconomica;
-    private Integer numeroTrabajadores;
-    private String userCreatePerson;
-    private Timestamp dateCreatePerson;
+    private String razSocEmp;
+    private String numDocEmp;
+    private String statusEmp;
+    private String conditionEmp;
+    private String addresEmp;
+    private String depaEmp;
+    private String provEmp;
+    private String distEmp;
+    private String economicActivityEmp;
+    private String numEmployedEmp;
+    private String userCreateEmp;
+    private Timestamp dateCreateEmp;
 }

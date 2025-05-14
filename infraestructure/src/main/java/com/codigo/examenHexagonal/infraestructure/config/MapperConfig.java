@@ -19,8 +19,8 @@ public class MapperConfig {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         mapper.createTypeMap(ResponseSunat.class, EmpresaEntity.class)
-                .addMapping(ResponseSunat::getRazonSocial, (dest,v)->dest.setRazSoc((String) v))
                 .addMapping(ResponseSunat::getNumeroDocumento, (dest,v)->dest.setNumDoc((String) v))
+                .addMapping(ResponseSunat::getRazonSocial, (dest,v)->dest.setRazSoc((String) v))
                 .addMapping(ResponseSunat::getEstado, (dest,v)->dest.setStatus((String) v))
                 .addMapping(ResponseSunat::getCondicion, (dest,v)->dest.setCondition((String) v))
                 .addMapping(ResponseSunat::getDireccion, (dest,v)->dest.setAddres((String) v))
@@ -28,7 +28,7 @@ public class MapperConfig {
                 .addMapping(ResponseSunat::getProvincia, (dest,v)->dest.setProv((String) v))
                 .addMapping(ResponseSunat::getDistrito, (dest,v)->dest.setDist((String) v))
                 .addMapping(ResponseSunat::getActividadEconomica, (dest,v)->dest.setEconomicActivity((String) v))
-                .addMapping(ResponseSunat::getNumeroTrabajadores, (dest,v)->dest.setNumEmployed((Integer) v));
+                .addMapping(ResponseSunat::getNumeroTrabajadores, (dest,v)->dest.setNumEmployed((String) v));
         return mapper;
     }
 }
