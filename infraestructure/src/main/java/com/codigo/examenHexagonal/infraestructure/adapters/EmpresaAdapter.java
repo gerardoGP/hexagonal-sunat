@@ -7,6 +7,7 @@ import com.codigo.examenHexagonal.infraestructure.repository.EmpresaRepository;
 import com.codigo.examenHexagonal.infraestructure.response.ResponseSunat;
 import com.codigo.examenHexagonal.infraestructure.rest.SunatClient;
 import lombok.extern.log4j.Log4j2;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,23 +27,23 @@ public class EmpresaAdapter implements EmpresaServiceOut {
     @Value("${token.api}")
     private String token;
 
-    public EmpresaAdapter(SunatClient sunatClient,
-                          @Qualifier("defaultMapper") ModelMapper empresaMapper,
-                          @Qualifier("sunatMapper") ModelMapper sunatMapper,
-                          EmpresaRepository empresaRepository) {
-        this.sunatClient = sunatClient;
-        this.empresaMapper = empresaMapper;
-        this.sunatMapper = sunatMapper;
-        this.empresaRepository = empresaRepository;
+    public EmpresaAdapter(SunatClient iniSunatClient,
+                          @Qualifier("defaultMapper") ModelMapper iniEmpresaMapper,
+                          @Qualifier("sunatMapper") ModelMapper iniSunatMapper,
+                          EmpresaRepository iniEmpresaRepository) {
+        this.sunatClient = iniSunatClient;
+        this.empresaMapper = iniEmpresaMapper;
+        this.sunatMapper = iniSunatMapper;
+        this.empresaRepository = iniEmpresaRepository;
     }
 
     @Override
     public EmpresaDTO createEmpresaOut(String ruc) {
-//        EmpresaEntity empresa = getEntityForSave(ruc);
-//        EmpresaEntity empresaEntity = empresaRepository.save(empresa); // registrar en la base de datos
-//        EmpresaDTO dto = mapToEmpresaDTO(empresaEntity);
-//        return dto;
-        return mapToEmpresaDTO(empresaRepository.save(getEntityForSave(ruc)));
+        EmpresaEntity empresa = getEntityForSave(ruc);
+        EmpresaEntity empresaEntity = empresaRepository.save(empresa); // registrar en la base de datos
+        EmpresaDTO dto = mapToEmpresaDTO(empresaEntity);
+        return dto;
+/*        return mapToEmpresaDTO(empresaRepository.save(getEntityForSave(ruc)));*/
     }
 
     private EmpresaEntity getEntityForSave(String ruc){
@@ -52,18 +53,18 @@ public class EmpresaAdapter implements EmpresaServiceOut {
             throw new RuntimeException("Respuesta invalida de SUNAT: "+ruc);
         }
         EmpresaEntity empresa = mapSunatToEmpresaEntity(responseSunat);
-        empresa.setUserCreate("GGARIBAY");
-        empresa.setDateCreate(new Timestamp(System.currentTimeMillis()));
+        empresa.setUserCreateEmp("GGARIBAY");
+        empresa.setDateCreateEmp(new Timestamp(System.currentTimeMillis()));
         return empresa;
+    }
+    private EmpresaDTO mapToEmpresaDTO(EmpresaEntity empresaEntity){
+        return empresaMapper.map(empresaEntity, EmpresaDTO.class);
     }
     private ResponseSunat executeSunat(String ruc){
         log.info("Consultando los datos a SUNAT para el RUC "+ruc);
         String header = "Bearer "+token;
         return Optional.ofNullable(sunatClient.getInfoSunat(ruc,header))
                 .orElseThrow(() -> new RuntimeException("Error al consultar con SUNAT"));
-    }
-    private EmpresaDTO mapToEmpresaDTO(EmpresaEntity empresaEntity){
-        return empresaMapper.map(empresaEntity, EmpresaDTO.class);
     }
     private EmpresaEntity mapSunatToEmpresaEntity(ResponseSunat responseSunat){
         return sunatMapper.map(responseSunat, EmpresaEntity.class);

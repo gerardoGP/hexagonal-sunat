@@ -20,7 +20,7 @@ public class EmpresaServiceImpl implements EmpresaServiceIn {
         String nameMethod = "createEmpresaIn";
         log.info("{} - {} - INICIO",SERVICE_NAME,nameMethod);
         EmpresaDTO empresaDTO = empresaServiceOut.createEmpresaOut(ruc);
-        log.info("{} - {} - FIN",SERVICE_NAME, nameMethod);
+        log.info("{} - {} - FIN",SERVICE_NAME,nameMethod);
         return empresaDTO;
     }
 }

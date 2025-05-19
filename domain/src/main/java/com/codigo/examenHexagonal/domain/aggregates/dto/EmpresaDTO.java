@@ -22,7 +22,7 @@ public class EmpresaDTO {
     private String provEmp;
     private String distEmp;
     private String economicActivityEmp;
-    private String numEmployedEmp;
+    private Integer numEmployedEmp;
     private String userCreateEmp;
     private Timestamp dateCreateEmp;
 }

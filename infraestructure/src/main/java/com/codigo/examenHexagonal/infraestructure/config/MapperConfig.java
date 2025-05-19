@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class MapperConfig {
     @Bean(name = "defaultMapper")
     public ModelMapper defaultMapper(){
+
         return new ModelMapper();
     }
 
@@ -19,16 +20,16 @@ public class MapperConfig {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         mapper.createTypeMap(ResponseSunat.class, EmpresaEntity.class)
-                .addMapping(ResponseSunat::getNumeroDocumento, (dest,v)->dest.setNumDoc((String) v))
-                .addMapping(ResponseSunat::getRazonSocial, (dest,v)->dest.setRazSoc((String) v))
-                .addMapping(ResponseSunat::getEstado, (dest,v)->dest.setStatus((String) v))
-                .addMapping(ResponseSunat::getCondicion, (dest,v)->dest.setCondition((String) v))
-                .addMapping(ResponseSunat::getDireccion, (dest,v)->dest.setAddres((String) v))
-                .addMapping(ResponseSunat::getDepartamento, (dest,v)->dest.setDepa((String) v))
-                .addMapping(ResponseSunat::getProvincia, (dest,v)->dest.setProv((String) v))
-                .addMapping(ResponseSunat::getDistrito, (dest,v)->dest.setDist((String) v))
-                .addMapping(ResponseSunat::getActividadEconomica, (dest,v)->dest.setEconomicActivity((String) v))
-                .addMapping(ResponseSunat::getNumeroTrabajadores, (dest,v)->dest.setNumEmployed((String) v));
+                .addMapping(ResponseSunat::getRazonSocial, (dest,v)->dest.setRazSocEmp((String) v))
+                .addMapping(ResponseSunat::getNumeroDocumento, (dest,v)->dest.setNumDocEmp((String) v))
+                .addMapping(ResponseSunat::getEstado, (dest,v)->dest.setStatusEmp((String) v))
+                .addMapping(ResponseSunat::getCondicion, (dest,v)->dest.setConditionEmp((String) v))
+                .addMapping(ResponseSunat::getDireccion, (dest,v)->dest.setAddresEmp((String) v))
+                .addMapping(ResponseSunat::getDepartamento, (dest,v)->dest.setDepaEmp((String) v))
+                .addMapping(ResponseSunat::getProvincia, (dest,v)->dest.setProvEmp((String) v))
+                .addMapping(ResponseSunat::getDistrito, (dest,v)->dest.setDistEmp((String) v))
+                .addMapping(ResponseSunat::getActividadEconomica, (dest,v)->dest.setEconomicActivityEmp((String) v))
+                .addMapping(ResponseSunat::getNumeroTrabajadores, (dest,v)->dest.setNumEmployedEmp((Integer) v));
         return mapper;
     }
 }

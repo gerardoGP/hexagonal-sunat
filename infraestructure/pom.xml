@@ -8,8 +8,8 @@
     </parent>
     <artifactId>infraestructure</artifactId>
     <name>Archetype - infraestructure</name>
-    <url>http://maven.apache.org</url>
     <version>11.0.0</version>
+    <url>http://maven.apache.org</url>
     <properties>
         <spring-cloud.version>2023.0.5</spring-cloud.version>
     </properties>
